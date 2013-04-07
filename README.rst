@@ -32,4 +32,4 @@ What it Doesn't Do (yet - see note above)
 
 License
 ---------
-Version 0.5.x is being released under LGPLv3.
+LGPLv3.
