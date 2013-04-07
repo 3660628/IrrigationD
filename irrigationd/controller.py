@@ -10,11 +10,8 @@ from bottle import run, route, get, post, request, response
 from pyioboard import RelayBoard, IODummy
 
 settings = {"serialport":'/dev/serial/by-id/usb-Microchip_Technology_Inc._CDC_RS-232_Emulation_Demo-if00',
-           # "gpios": [0, 1, 2, 3, 4, 5],
             "gpios": [],
             "relays": [0, 1, 2, 3, 4, 5, 6, 7],
-            "redis_host": 'redis',
-            "redis_namespace": 'cortana:irrigation',
             }
 
 import logging
@@ -25,7 +22,6 @@ logging.basicConfig(level=logging.DEBUG,
 
 class IrrigationController(object):
     def __init__(self, relayboard, settings):
-        '''must include a redis configuration in the settings, see documentation'''
         self.controllerlock = threading.Lock()
         self.cfg = settings
         self.relayboard = relayboard
@@ -108,23 +104,11 @@ class IrrigationController(object):
         ws = WebService(self)
         self.threads.append(ws)
 
-        #serialio = SerialIO(self)
-
-        #rediscmds = RedisCmdMsgs(self)
-        #worker = Worker(self)
-
-        #self.threads.append(worker)
-        #self.threads.append(serialio)
-        #self.threads.append(rediscmds)
-
         logging.info("Starting Threads")
         for thread in self.threads:
-            #thread.setDaemon(True)
             thread.start()
 
     def _main_loop(self):
-#        logging.debug("main loop step")
-        #self.pendingcmds.put(PendingSerialCmd('refresh'))
         if self.cycle is None:
             self.sleeptillminute()
         else:
