@@ -16,17 +16,17 @@ I have time.
 Features
 -----------
 
-*Multi-Zone (I'm currently running 8)
-*WebService
-*Currently integrates with USB relay boards via pyIOBoard (would be easy to add support for other relay boards)
+- Multi-Zone (I'm currently running 8)
+- WebService
+- Currently integrates with USB relay boards via pyIOBoard (would be easy to add support for other relay boards)
 
 
 
 What it Doesn't Do (yet - see note above)
 --------------------
 
-*Scheduling... (you can use a curl command in cron)
-*Rain Logic  (we don't get much)
+- Scheduling... (you can use a curl command in cron)
+- Rain Logic  (we don't get much)
 
 
 
