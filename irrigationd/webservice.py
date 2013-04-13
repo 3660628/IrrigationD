@@ -47,5 +47,5 @@ class WebService(threading.Thread):
             if self.ic.cycle('off') is True:
                 return "off"
 
-        run(host='0.0.0.0', port=8082, quiet=True)
+        run(host='0.0.0.0', port=8087, quiet=True)
 

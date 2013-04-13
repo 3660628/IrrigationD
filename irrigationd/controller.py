@@ -3,6 +3,7 @@ from datetime import datetime
 import Queue
 import redis
 import logging
+import sys
 import time
 from webservice import WebService
 from cycle import IrrigationCycle, Stage
@@ -70,7 +71,7 @@ class IrrigationController(object):
                 self._current_cycle = IrrigationCycle(self, cycleinfo=cycleinfo)
             else:
                 self._current_cycle = None
-            self._reset_controller(refresh=False)
+                self._reset_controller(refresh=True)
             self.poll()
         except Exception as e:
             logging.critical("Error creating Cycle: {0}".format(e), exc_info=1)
@@ -87,6 +88,8 @@ class IrrigationController(object):
             self._current_cycle.check_cycle()
             if self._current_cycle.status == "Completed":
                 self._current_cycle = None
+                self._reset_controller(refresh=True)
+
 
     def start(self):
         logging.debug("Main STARTING")
@@ -110,6 +113,7 @@ class IrrigationController(object):
 
     def _main_loop(self):
         if self.cycle is None:
+            self._reset_controller(refresh=True)
             self.sleeptillminute()
         else:
             time.sleep(5)
