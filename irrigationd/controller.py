@@ -68,6 +68,7 @@ class IrrigationController(object):
         try:
             logging.info("Setting Cycle: {0}".format(cycleinfo))
             if cycleinfo != 'off':
+                self._reset_controller(refresh=False)
                 self._current_cycle = IrrigationCycle(self, cycleinfo=cycleinfo)
             else:
                 self._current_cycle = None
